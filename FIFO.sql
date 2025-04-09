@@ -6,6 +6,53 @@
 
 
 
+--	SELECT 
+--		prod,
+--		SUM(CASE WHEN time = EOMONTH('2024-01-01') AND typ = 'in' THEN qty ELSE 0 END) AS January_IN,
+--		SUM(CASE WHEN time = EOMONTH('2024-01-01') AND typ = 'out' THEN qty ELSE 0 END) AS January_OUT,
+--		MAX(CASE WHEN time = EOMONTH('2024-01-01') THEN rest_number ELSE 0 END) AS January_rest,
+--		SUM(CASE WHEN time = EOMONTH('2024-02-01') AND typ = 'in' THEN qty ELSE 0 END) AS February_IN,
+--		SUM(CASE WHEN time = EOMONTH('2024-02-01') AND typ = 'out' THEN qty ELSE 0 END) AS February_OUT,
+--		MAX(CASE WHEN time = EOMONTH('2024-02-01') THEN rest_number ELSE 0 END) AS February_rest,
+--		SUM(CASE WHEN time = EOMONTH('2024-03-01') AND typ = 'in' THEN qty ELSE 0 END) AS March_IN,
+--		SUM(CASE WHEN time = EOMONTH('2024-03-01') AND typ = 'out' THEN qty ELSE 0 END) AS March_OUT,
+--		MAX(CASE WHEN time = EOMONTH('2024-03-01') THEN rest_number ELSE 0 END) AS March_rest
+--	FROM FIFO
+--	WHERE time IN ( EOMONTH('2024-01-01'), EOMONTH('2024-02-01'), EOMONTH('2024-03-01') )
+--GROUP BY prod;
+
+
+
+
+
+
+--SELECT
+--		prod,
+--    SUM(CASE WHEN DATEDIFF(MONTH, time, '2025-02-28') = 0 THEN qty ELSE 0 END) AS "Less than a month",
+--    SUM(CASE WHEN DATEDIFF(MONTH, time, '2025-02-28') BETWEEN 1 AND 2 THEN qty ELSE 0 END) AS "1-2 months",
+--    SUM(CASE WHEN DATEDIFF(MONTH, time, '2025-02-28') BETWEEN 3 AND 4 THEN qty ELSE 0 END) AS "3-4 months",
+--    SUM(CASE WHEN DATEDIFF(MONTH, time, '2025-02-28') BETWEEN 5 AND 6 THEN qty ELSE 0 END) AS "5-6 months",
+--    SUM(CASE WHEN DATEDIFF(MONTH, time, '2025-02-28') BETWEEN 7 AND 8 THEN qty ELSE 0 END) AS "7-8 months",
+--    SUM(CASE WHEN DATEDIFF(MONTH, time, '2025-02-28') BETWEEN 9 AND 10 THEN qty ELSE 0 END) AS "9-10 months",
+--    SUM(CASE WHEN DATEDIFF(MONTH, time, '2025-02-28') BETWEEN 11 AND 12 THEN qty ELSE 0 END) AS "11-12 months",
+--    SUM(CASE WHEN DATEDIFF(DAY, time, '2025-02-28') > 360 THEN qty ELSE 0 END) AS "360+",
+--    SUM(qty) AS "Total"
+--FROM FIFO
+--WHERE typ = 'in'
+--GROUP BY prod
+--ORDER BY prod;
+
+
+--SELECT * FROM FIFO;
+
+
+
+
+
+
+
+
+
  WITH t as(
 	SELECT 'A' prod, 100 qty, 'in' typ,  EOMONTH('2024-01-01') time UNION ALL
 	SELECT 'A', 20, 'out', EOMONTH('2024-02-01') UNION ALL
@@ -58,42 +105,3 @@ ORDER BY prod;
 
 
 
-
---	SELECT 
---		prod,
---		SUM(CASE WHEN time = EOMONTH('2024-01-01') AND typ = 'in' THEN qty ELSE 0 END) AS January_IN,
---		SUM(CASE WHEN time = EOMONTH('2024-01-01') AND typ = 'out' THEN qty ELSE 0 END) AS January_OUT,
---		MAX(CASE WHEN time = EOMONTH('2024-01-01') THEN rest_number ELSE 0 END) AS January_rest,
---		SUM(CASE WHEN time = EOMONTH('2024-02-01') AND typ = 'in' THEN qty ELSE 0 END) AS February_IN,
---		SUM(CASE WHEN time = EOMONTH('2024-02-01') AND typ = 'out' THEN qty ELSE 0 END) AS February_OUT,
---		MAX(CASE WHEN time = EOMONTH('2024-02-01') THEN rest_number ELSE 0 END) AS February_rest,
---		SUM(CASE WHEN time = EOMONTH('2024-03-01') AND typ = 'in' THEN qty ELSE 0 END) AS March_IN,
---		SUM(CASE WHEN time = EOMONTH('2024-03-01') AND typ = 'out' THEN qty ELSE 0 END) AS March_OUT,
---		MAX(CASE WHEN time = EOMONTH('2024-03-01') THEN rest_number ELSE 0 END) AS March_rest
---	FROM FIFO
---	WHERE time IN ( EOMONTH('2024-01-01'), EOMONTH('2024-02-01'), EOMONTH('2024-03-01') )
---GROUP BY prod;
-
-
-
-
-
-
---SELECT
---		prod,
---    SUM(CASE WHEN DATEDIFF(MONTH, time, '2025-02-28') = 0 THEN qty ELSE 0 END) AS "Less than a month",
---    SUM(CASE WHEN DATEDIFF(MONTH, time, '2025-02-28') BETWEEN 1 AND 2 THEN qty ELSE 0 END) AS "1-2 months",
---    SUM(CASE WHEN DATEDIFF(MONTH, time, '2025-02-28') BETWEEN 3 AND 4 THEN qty ELSE 0 END) AS "3-4 months",
---    SUM(CASE WHEN DATEDIFF(MONTH, time, '2025-02-28') BETWEEN 5 AND 6 THEN qty ELSE 0 END) AS "5-6 months",
---    SUM(CASE WHEN DATEDIFF(MONTH, time, '2025-02-28') BETWEEN 7 AND 8 THEN qty ELSE 0 END) AS "7-8 months",
---    SUM(CASE WHEN DATEDIFF(MONTH, time, '2025-02-28') BETWEEN 9 AND 10 THEN qty ELSE 0 END) AS "9-10 months",
---    SUM(CASE WHEN DATEDIFF(MONTH, time, '2025-02-28') BETWEEN 11 AND 12 THEN qty ELSE 0 END) AS "11-12 months",
---    SUM(CASE WHEN DATEDIFF(DAY, time, '2025-02-28') > 360 THEN qty ELSE 0 END) AS "360+",
---    SUM(qty) AS "Total"
---FROM FIFO
---WHERE typ = 'in'
---GROUP BY prod
---ORDER BY prod;
-
-
---SELECT * FROM FIFO;
