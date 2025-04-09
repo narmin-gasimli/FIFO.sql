@@ -1,9 +1,3 @@
--- task
--- A və B məhsuli, aylar üzrə nə qədər köhnəlib onu tapmaq lazımdır FİFO(ilk girən ilk çıxar) yanaşmasi ilə.
--- hesabat tarixi 2025-01-01 dir.
----  misal mən 2024 yanvarda, 50 karandaş aldım sonra 2024 fevralda 20 dənəsini aldım. sonra martda 40 dənə satdım. bu 40 dənə 50 dənə karandaşdan azalır. dekabrda 15 dənə yenə karandaş aldım.
---  anbarda 45 karandaş var. hesabatımda, 0-1 ay, 1-2 ay, 2-3 ay, ....11-12 ay, sütunlarım olacaq.  0-1 ayda=15, 10-11 ayda= 20, 11-12 aya=10 digərləri 0 göstərməlidir.
-
 
 
  WITH t as(
